@@ -18,7 +18,7 @@ const ConversionDisplay = ({ amount, result, convertTo, date }) => {
                 {" "}
                 {convertTo}
             </h2>
-            <p>as of {amount === "" ? "" : date === null ? "" : date}</p>
+            <p>as of {amount === "" ? "..." : date === null ? "" : date}</p>
         </Fragment>
     );
 };
@@ -63,6 +63,20 @@ const CurrencySelectionDisplay = ({
     );
 };
 
+const CurrencySwap = ({ onSwap }) => {
+    return (
+        <div className="col-lg-2 align-self-center">
+            <h1
+                className="swap"
+                onClick={ onSwap }
+            >
+                &#8595;&#8593;
+            </h1>
+        </div>
+    );
+};
 
-export { ConversionDisplay, CurrencySelectionDisplay };
+
+export { ConversionDisplay, CurrencySelectionDisplay, CurrencySwap };
+
 export default TopDisplay;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TopDisplay, { ConversionDisplay, CurrencySelectionDisplay } from "./TopDisplay";
+import TopDisplay, { ConversionDisplay, CurrencySelectionDisplay, CurrencySwap } from "./TopDisplay";
 
 class ConverterContainer extends Component {
     state = {
@@ -9,6 +9,7 @@ class ConverterContainer extends Component {
         convertTo: "EUR",
         result: "",
         date: "",
+        error: false,
     };
 
     handleInput = e => {
@@ -48,9 +49,11 @@ class ConverterContainer extends Component {
                     });
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.setState({
+                        error: true
+                    })
                 });
-                //  handle error
+
         }
     };
 
@@ -74,107 +77,65 @@ class ConverterContainer extends Component {
             amount,
             convertTo,
             result,
-            date
+            date,
+            error,
         } = this.state;
 
         return (
-            <div className="container">
-                <div className="row">
-                    <div>
-                        <div>
-                            <TopDisplay
-                                amount={ amount }
-                                base={ base }
-                            />
-                            <ConversionDisplay
-                                amount={ amount }
-                                result={ result }
-                                convertTo={ convertTo }
-                                date={ date }
-                            />
-                            <div className="row">
-                                <div className="col-lg-10">
-                                    <CurrencySelectionDisplay
-                                        type={ "number" }
-                                        amount={ amount }
-                                        disabled={ false }
-                                        onInput={ this.handleInput }
-                                        onSelect={ this.handleSelect }
-                                        convertTo={ base }
-                                        currencies={ currencies }
-                                        name={ "base" }
-                                    />
-                                    <form className="form-inline mb-4">
-                                        <input
-                                            className="form-control form-control-lg mx-3"
-                                            type="number"
-                                            value={amount}
-                                            onChange={ this.handleInput }
+            error ?
+                <h5>Oops! Problem occurred converting your amount</h5>
+            :
+                <div className="container">
+                    <div className="row">
+                            <div>
+                                <TopDisplay
+                                    amount={ amount }
+                                    base={ base }
+                                />
+                                <ConversionDisplay
+                                    amount={ amount }
+                                    result={ result }
+                                    convertTo={ convertTo }
+                                    date={ date }
+                                />
+                                <div className="row">
+                                    <div className="col-lg-10">
+                                        <CurrencySelectionDisplay
+                                            type={ "number" }
+                                            name={ "base" }
+                                            amount={ amount }
+                                            disabled={ false }
+                                            onInput={ this.handleInput }
+                                            onSelect={ this.handleSelect }
+                                            convertTo={ base }
+                                            currencies={ currencies }
                                         />
-                                        <select
-                                            className="form-control form-control-lg"
-                                            name="base"
-                                            value={ base }
-                                            onChange={ this.handleSelect }
-                                        >
-                                            {
-                                                currencies.map(currency => (
-                                                    <option
-                                                        key={ currency }
-                                                        value={ currency }
-                                                    >
-                                                        { currency }
-                                                    </option>
-                                                ))
-                                            }
-                                        </select>
-                                    </form>
 
-                                    <form className="form-inline mb-4">
-                                        <input
-                                            className="form-control form-control-lg mx-3"
-                                            disabled={ true }
-                                            value={
-                                                amount === ""
+                                        <CurrencySelectionDisplay
+                                            type={ "number" }
+                                            name={ "convertTo" }
+                                            amount={
+                                                    amount === ""
                                                     ? "0"
                                                     : result === null
                                                     ? "Calculating..."
                                                     : result
-                                            }
+                                                    }
+                                            disabled={ true }
+                                            onInput={ null }
+                                            onSelect={ this.handleSelect }
+                                            convertTo={ convertTo }
+                                            currencies={ currencies }
                                         />
-                                        <select
-                                            className="form-control form-control-lg"
-                                            name="convertTo"
-                                            value={ convertTo }
-                                            onChange={ this.handleSelect }
-                                        >
-                                            {
-                                                currencies.map(currency => (
-                                                    <option
-                                                        key={ currency }
-                                                        value={ currency }
-                                                    >
-                                                        { currency }
-                                                    </option>
-                                                ))
-                                            }
-                                        </select>
-                                    </form>
-                                </div>
+                                    </div>
 
-                                <div className="col-lg-2 align-self-center">
-                                    <h1
-                                        className="swap"
-                                        onClick={ this.handleSwap }
-                                    >
-                                        &#8595;&#8593;
-                                    </h1>
+                                    <CurrencySwap
+                                        onSwap={ this.handleSwap }
+                                    />
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
-            </div>
         );
     }
 }
