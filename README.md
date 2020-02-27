@@ -1,19 +1,4 @@
-# Currency Converter
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Getting Started
-
-Run:
-
-    yarn
-
-or
-
-    yarn install
-
-This will install all the required packages.
-
 
 ## Available Scripts
 
