@@ -13,6 +13,7 @@ class ConverterContainer extends Component {
     };
 
     handleInput = e => {
+        console.log(this.state.base, this.state.convertTo);
         this.setState(
             {
                 amount: e.target.value,
@@ -24,6 +25,7 @@ class ConverterContainer extends Component {
     };
 
     handleSelect = e => {
+        console.log(this.state.base, this.state.convertTo);
         this.setState({
             [e.target.name]: e.target.value,
             result: null,
@@ -33,6 +35,7 @@ class ConverterContainer extends Component {
     };
 
     calculate = () => {
+        console.log("calculate", this.state.base, this.state.convertTo, this.state.amount);
         const amount = this.state.amount;
 
         if (Number.isNaN(amount)) {
