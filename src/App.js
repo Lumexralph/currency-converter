@@ -1,5 +1,5 @@
 import React from 'react';
-import CurrencyConverter from "./ConverterwithHooks";
+import CurrencyConverter from "./Converter";
 import './App.css';
 
 function App() {

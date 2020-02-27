@@ -34,16 +34,14 @@ const CurrencySelectionDisplay = ({
     name,
 }) => {
     return (
-        <form className="form-inline mb-4">
+        <form>
             <input
                 type={ type }
-                className="form-control form-control-lg mx-3"
                 disabled={ disabled }
                 value={ amount }
                 onChange={ onInput }
             />
             <select
-                className="form-control form-control-lg"
                 name={ name }
                 value={ convertTo }
                 onChange={ onSelect }
@@ -65,7 +63,7 @@ const CurrencySelectionDisplay = ({
 
 const CurrencySwap = ({ onSwap }) => {
     return (
-        <div className="col-lg-2 align-self-center">
+        <div>
             <h1
                 className="swap"
                 onClick={ onSwap }
