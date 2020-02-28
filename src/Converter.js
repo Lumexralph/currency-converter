@@ -70,7 +70,7 @@ const CurrencyConverter = () => {
             dispatch(setConvertTo(target.value));
         }
 
-        dispatch(setResult(null));
+        // dispatch(setResult(null));
     };
 
     const handleSwap = e => {

@@ -1,7 +1,7 @@
 import { SET_AMOUNT, CURRENCY_DATA, SET_BASE, CONVERT_TO, SET_RESULT, SET_DATE, ERROR } from "../constants/action-types";
 
 export const initialState = {
-    currencies: ["USD", "EUR", "JPY", "GBP"],
+    currencies: ["USD", "JPY", "GBP"],
     base: "USD",
     amount: "",
     convertTo: "EUR",
